@@ -283,7 +283,7 @@ public class PainelProduto extends PainelDados{
         JPanel p = new JPanel();
         JPanel p1 = new JPanel();
 
-        String[] unidades = {"un - Unidaade","kg - Kilograma","g - Grama","dz - Duzia","ct - Cento","dz/2 - Meia-duzia"};
+        String[] unidades = {"un - Unidade","kg - Kilograma","g - Grama","dz - Duzia","ct - Cento","dz/2 - Meia-duzia"};
         txt1 = new JTextField(15);
         txt2 = new JTextField(15);
         txt3 = new JTextField(15);
