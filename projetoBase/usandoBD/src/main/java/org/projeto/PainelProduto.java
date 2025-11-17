@@ -235,7 +235,7 @@ public class PainelProduto extends PainelDados{
                            if(verificaValores()){
                                d.append("nomeProduto", txtNomeProduto.getText());
                                d.append("qtdeEstoque",Integer.parseInt(txt2.getText()));
-                               d.append("idCategoria", Objects.requireNonNull(a.getSelectedItem()).toString().split(" - ")[0]);
+                               d.append("idCategoria", Integer.parseInt(Objects.requireNonNull(a.getSelectedItem()).toString().split(" - ")[0]));
                                d.append("unidadeMedida", Objects.requireNonNull(cbUN.getSelectedItem()).toString().split(" -")[0]);
                                d.append("preco", Double.parseDouble(txtPreco.getText()));
 
