@@ -3,6 +3,8 @@ package org.projeto;
 import com.mongodb.client.MongoDatabase;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +26,15 @@ public class FrameDados extends JFrame {
         abas.add("Produtos",p);
         abas.add("Categorias",p1);
 
+        abas.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(abas.getSelectedComponent() == p){
+                    p.atualizaTela();
+                }
+            }
+        });
+
         setLayout(new BorderLayout());
 
         add(abas,BorderLayout.CENTER);
@@ -31,4 +42,6 @@ public class FrameDados extends JFrame {
         p.setVisible(false);
         p1.setVisible(false);
     }
+
+
 }

@@ -167,21 +167,23 @@ public class PainelCategoria extends PainelDados{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    Document doc = new Document();
-                    doc.append("nomeCategoria", txt1.getText());
-                    doc.append("_id",Integer.parseInt(txt2.getText()));
-                    categoria.insertOne(doc);
-                    dados.add(doc);
-                    dados.sort((d1,d2) ->{
-                        int id1 = Integer.parseInt(d1.get("_id").toString());
-                        int id2 = Integer.parseInt(d2.get("_id").toString());
-                        return Integer.compare(id1,id2);
-                    });
-                    model.setRowCount(0);
-                    for (Document d : dados) {
-                        model.addRow(new Object[]{d.get("nomeCategoria"), d.get("_id")});
+                    if(verificaValores()){
+                        Document doc = new Document();
+                        doc.append("nomeCategoria", txt1.getText());
+                        doc.append("_id",Integer.parseInt(txt2.getText()));
+                        categoria.insertOne(doc);
+                        dados.add(doc);
+                        dados.sort((d1,d2) ->{
+                            int id1 = Integer.parseInt(d1.get("_id").toString());
+                            int id2 = Integer.parseInt(d2.get("_id").toString());
+                            return Integer.compare(id1,id2);
+                        });
+                        model.setRowCount(0);
+                        for (Document d : dados) {
+                            model.addRow(new Object[]{d.get("nomeCategoria"), d.get("_id")});
+                        }
+                        JOptionPane.showMessageDialog(null,"Produto inserido com sucesso !");
                     }
-                    JOptionPane.showMessageDialog(null,"Produto inserido com sucesso !");
                 }catch (MongoException m){
                     System.out.println(m.getMessage());
                 }
@@ -316,5 +318,14 @@ public class PainelCategoria extends PainelDados{
             btnProximo.setEnabled(false);
             btnFim.setEnabled(false);
         }
+    }
+
+    private boolean verificaValores(){
+        int id = Integer.parseInt(txt2.getText());
+        if(id < 0){
+            JOptionPane.showMessageDialog(null,"ID negativo ! Inclusão negativo");
+            return false;
+        }
+        return true;
     }
 }

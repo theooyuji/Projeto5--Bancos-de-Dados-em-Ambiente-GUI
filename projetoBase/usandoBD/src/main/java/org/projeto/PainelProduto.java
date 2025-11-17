@@ -169,27 +169,29 @@ public class PainelProduto extends PainelDados{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    Document d = new Document("_id", Integer.parseInt(txt1.getText()));
+                    if(verificaValores()){
+                        Document d = new Document("_id", Integer.parseInt(txt1.getText()));
 
-                    d.append("imagem", "");
-                    d.append("nomeProduto", txtNomeProduto.getText());
-                    d.append("qtdeEstoque",Integer.parseInt(txt2.getText()));
-                    d.append("idCategoria", Integer.parseInt(Objects.requireNonNull(a.getSelectedItem()).toString().split(" - ")[0]));
-                    d.append("unidadeMedida", Objects.requireNonNull(cbUN.getSelectedItem()).toString().split(" - ")[0]);
-                    d.append("preco", Double.parseDouble(txtPreco.getText()));
+                        d.append("imagem", "");
+                        d.append("nomeProduto", txtNomeProduto.getText());
+                        d.append("qtdeEstoque",Integer.parseInt(txt2.getText()));
+                        d.append("idCategoria", Integer.parseInt(Objects.requireNonNull(a.getSelectedItem()).toString().split(" - ")[0]));
+                        d.append("unidadeMedida", Objects.requireNonNull(cbUN.getSelectedItem()).toString().split(" - ")[0]);
+                        d.append("preco", Double.parseDouble(txtPreco.getText()));
 
-                    produto.insertOne(d);
-                    dados.add(d);
+                        produto.insertOne(d);
+                        dados.add(d);
 
-                    dados.sort(( d1, d2) -> {
-                        int id1 = Integer.parseInt(d1.get("_id").toString());
-                        int id2 = d2.getInteger("_id");
-                        return Integer.compare(id1,id2);
-                    });
+                        dados.sort(( d1, d2) -> {
+                            int id1 = Integer.parseInt(d1.get("_id").toString());
+                            int id2 = d2.getInteger("_id");
+                            return Integer.compare(id1,id2);
+                        });
 
-                    JOptionPane.showMessageDialog(null, "Produto inserido.");
+                        JOptionPane.showMessageDialog(null, "Produto inserido.");
 
-                    preencharDados(dados);
+                        preencharDados(dados);
+                    }
                 }catch (MongoException me){
                     System.out.println(me.getMessage());
                 }
@@ -230,16 +232,18 @@ public class PainelProduto extends PainelDados{
                     if(JOptionPane.showConfirmDialog(null, "Deseja realmente mudar esse produto ?") == JOptionPane.OK_OPTION){
 
                        if(produto.find(Filters.eq("_id", id)).first() != null){
-                           d.append("nomeProduto", txtNomeProduto.getText());
-                           d.append("qtdeEstoque",Integer.parseInt(txt2.getText()));
-                           d.append("idCategoria", Objects.requireNonNull(a.getSelectedItem()).toString().split(" - ")[0]);
-                           d.append("unidadeMedida", Objects.requireNonNull(cbUN.getSelectedItem()).toString().split(" -")[0]);
-                           d.append("preco", Double.parseDouble(txtPreco.getText()));
+                           if(verificaValores()){
+                               d.append("nomeProduto", txtNomeProduto.getText());
+                               d.append("qtdeEstoque",Integer.parseInt(txt2.getText()));
+                               d.append("idCategoria", Objects.requireNonNull(a.getSelectedItem()).toString().split(" - ")[0]);
+                               d.append("unidadeMedida", Objects.requireNonNull(cbUN.getSelectedItem()).toString().split(" -")[0]);
+                               d.append("preco", Double.parseDouble(txtPreco.getText()));
 
-                           produto.updateOne(Filters.eq("_id", id), new Document("$set", d));
-                           dados.set(ind, d);
-                           preencharDados(dados);
-                           JOptionPane.showMessageDialog(null, "Produto alterado");
+                               produto.updateOne(Filters.eq("_id", id), new Document("$set", d));
+                               dados.set(ind, d);
+                               preencharDados(dados);
+                               JOptionPane.showMessageDialog(null, "Produto alterado");
+                           }
 
                        }
                        else{
@@ -343,18 +347,6 @@ public class PainelProduto extends PainelDados{
     }
 
     private void exibeDados(Document d){
-       /* p.add(new JLabel("ID"));
-        p.add(txt1);
-        p.add(new JLabel("Nome"));
-        p.add(txtNomeProduto);
-        p.add(new JLabel("Quantidade de estoque"));
-        p.add(txt2);
-        p.add(new JLabel("ID da Categoria"));
-        p.add(a);
-        p.add(new JLabel("Unidade de medida"));
-        p.add(cbUN);
-        p.add(new JLabel("Preço"));
-        p.add(txtPreco);*/
         txt1.setText(d.get("_id").toString());
         txtNomeProduto.setText(d.get("nomeProduto").toString());
         txt2.setText(d.get("qtdeEstoque").toString());
@@ -404,5 +396,28 @@ public class PainelProduto extends PainelDados{
             btnProximo.setEnabled(false);
             btnFim.setEnabled(false);
         }
+    }
+
+    private boolean verificaValores(){
+        int id = Integer.parseInt(txt1.getText());
+        int qtdeEstoque = Integer.parseInt(txt2.getText());
+        double preco = Double.parseDouble(txtPreco.getText());
+
+        if(id < 0){
+            JOptionPane.showMessageDialog(null,"ID negativo ! Operação cancelada !");
+            return false;
+        }
+
+        if(qtdeEstoque < 0){
+            JOptionPane.showMessageDialog(null,"Quantidade de estoque negativa ! Operação cancelada !");
+            return false;
+        }
+
+
+        if(preco < 0){
+            JOptionPane.showMessageDialog(null,"Preço negativo ! Operação cancelada");
+            return false;
+        }
+        return true;
     }
 }
