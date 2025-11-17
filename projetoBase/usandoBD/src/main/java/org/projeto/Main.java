@@ -30,10 +30,13 @@ public class Main {
                             mongo.close();
                             System.out.println(mongoException.getMessage());
                         }
-                        if(form != null)
+                        if(form != null){
+                            form.pack();
                             form.setVisible(true);
+                        }
 
                     }
+
                 }
         );
     }
