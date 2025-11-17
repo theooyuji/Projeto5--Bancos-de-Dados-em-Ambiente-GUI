@@ -38,49 +38,49 @@ public class PainelProduto extends PainelDados{
         toolBar = new JToolBar();
         toolBar.setLayout(new FlowLayout());
 
-        btnInicio = new JButton("Inicio", new ImageIcon("test/first.png"));
+        btnInicio = new JButton("Inicio", new ImageIcon("projetoBase/usandoBD/test/first.png"));
         btnInicio.setPreferredSize(new Dimension(65,45));
         btnInicio.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnInicio.setHorizontalTextPosition(SwingConstants.CENTER);
         btnInicio.setFocusPainted(false);
 
-        btnAnterior = new JButton("Voltar", new ImageIcon("test/prior.png"));
+        btnAnterior = new JButton("Voltar", new ImageIcon("projetoBase/usandoBD/test/prior.png"));
         btnAnterior.setPreferredSize(new Dimension(65,45));
         btnAnterior.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnAnterior.setHorizontalTextPosition(SwingConstants.CENTER);
         btnAnterior.setFocusPainted(false);
 
-        btnProximo = new JButton("Proximo", new ImageIcon("test/next.png"));
+        btnProximo = new JButton("Proximo", new ImageIcon("projetoBase/usandoBD/test/next.png"));
         btnProximo.setPreferredSize(new Dimension(65,45));
         btnProximo.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnProximo.setHorizontalTextPosition(SwingConstants.CENTER);
         btnProximo.setFocusPainted(false);
 
-        btnFim = new JButton("Fim", new ImageIcon("test/last.png"));
+        btnFim = new JButton("Fim", new ImageIcon("projetoBase/usandoBD/test/last.png"));
         btnFim.setPreferredSize(new Dimension(65,45));
         btnFim.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnFim.setHorizontalTextPosition(SwingConstants.CENTER);
         btnFim.setFocusPainted(false);
 
-        btnIncluir = new JButton("Incluir", new ImageIcon("test/Add.png"));
+        btnIncluir = new JButton("Incluir", new ImageIcon("projetoBase/usandoBD/test/Add.png"));
         btnIncluir.setPreferredSize(new Dimension(65,45));
         btnIncluir.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnIncluir.setHorizontalTextPosition(SwingConstants.CENTER);
         btnIncluir.setFocusPainted(false);
 
-        btnExcluir = new JButton("Excluir", new ImageIcon("test/Minus.png"));
+        btnExcluir = new JButton("Excluir", new ImageIcon("projetoBase/usandoBD/test/Minus.png"));
         btnExcluir.setPreferredSize(new Dimension(65,45));
         btnExcluir.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnExcluir.setHorizontalTextPosition(SwingConstants.CENTER);
         btnExcluir.setFocusPainted(false);
 
-        btnSalvar = new JButton("Alterar", new ImageIcon("test/Save.png"));
+        btnSalvar = new JButton("Alterar", new ImageIcon("projetoBase/usandoBD/test/Save.png"));
         btnSalvar.setPreferredSize(new Dimension(65,45));
         btnSalvar.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnSalvar.setHorizontalTextPosition(SwingConstants.CENTER);
         btnSalvar.setFocusPainted(false);
 
-        btnBuscar = new JButton("Buscar", new ImageIcon("test/FIND.png"));
+        btnBuscar = new JButton("Buscar", new ImageIcon("projetoBase/usandoBD/test/FIND.png"));
         btnBuscar.setPreferredSize(new Dimension(65,45));
         btnBuscar.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnBuscar.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -161,6 +161,7 @@ public class PainelProduto extends PainelDados{
                 else{
                     JOptionPane.showMessageDialog(null,"Não existe registros nessa coleção ! ");
                 }
+                verificaBotoes();
             }
         });
 
